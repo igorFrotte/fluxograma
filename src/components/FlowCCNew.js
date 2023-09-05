@@ -7,6 +7,8 @@ export default function FlowCCNew() {
 
   const { id } = useParams();
   const [url, setUrl] = useState("");
+  const [req, setReq] = useState(null);
+  const [isReq, setIsReq] = useState(null);
 
   const numPeriods = 8;
   const [subjects,setSubjects] = useState([
@@ -18,7 +20,7 @@ export default function FlowCCNew() {
     ["Fundamentos de Arquitetura de Computadores", 1, [], [], "#fff", 0],
     ["Programação de Computadores 2", 2, [], [], "#fff", 0],
     ["Lógica para Ciência da Computação", 2, [], [], "#fff", 0],
-    ["Álgebra Linear", 2, [], [], "#fff", 0],
+    ["Álgebra Linear", 2, [15,16], [7,9], "#fff", 0],
     ["Cálculo 2", 2, [], [], "#fff", 0],
     ["Circuitos Digitais", 2, [], [], "#fff", 0],
     ["Laboratório de Circuitos Digitais", 2, [], [], "#fff", 0],
@@ -27,7 +29,7 @@ export default function FlowCCNew() {
     ["Física 1", 3, [], [], "#fff", 0],
     ["Métodos Numéricos", 3, [], [], "#fff", 0],
     ["Cálculo 3", 3, [], [], "#fff", 0],
-    ["Paradigmas de Programação", 3, [], [], "#fff", 0],
+    ["Paradigmas de Programação", 3, [1,2], [23,24], "#fff", 0],
     ["Análise e Projetos de Algoritmos", 4, [], [], "#fff", 0],
     ["Probabilidade e Estatística", 4, [], [], "#fff", 0],
     ["Física 3 - A", 4, [], [], "#fff", 0],
@@ -71,8 +73,16 @@ export default function FlowCCNew() {
   }
 
   function turnReady(index){
-    subjects[index][4] = "#ddd";
-    subjects[index][5] = 1;
+    if(subjects[index][5] !== 1){
+      if(subjects[index][4] === "#fff")
+        subjects[index][4] = "#ddd";
+      subjects[index][5] = 1;
+    } else {
+      if(subjects[index][4] === "#ddd")
+        subjects[index][4] = "#fff";
+      subjects[index][5] = 0;
+    }
+    
   }
 
   function completed( list ){
@@ -80,6 +90,7 @@ export default function FlowCCNew() {
       if(subjects[e]){
         turnReady(e);
       }
+      return 1; 
     });
   }
 
@@ -88,10 +99,46 @@ export default function FlowCCNew() {
     subjects.map((e, i) => {
       if(e[5] === 1)
         param = param + i + "-";
+      return 1;
     });
     setUrl(param);
     navigator.clipboard.writeText(param);
     alert("Link copiado!");
+  }
+
+  function clearSubs( item, ind ){
+    if(item){
+      subjects[item][ind].map((e) => {
+        if(subjects[e][5] === 1)
+          subjects[e][4] = "#ddd";
+        else subjects[e][4] = "#fff";
+        return 1;
+      });
+    }
+  }
+
+  function requires( list, sub ){
+    clearSubs(req, 2);
+    if(req !== sub){
+      list.map((e) => {
+        subjects[e][4] = "#d4d";
+        return 1;
+      });
+      setReq(sub);
+    } else setReq(null);
+    setSubjects([...subjects]);
+  }
+
+  function isRequired( list, sub ){
+    clearSubs(isReq, 3);
+    if(isReq !== sub){
+      list.map((e) => {
+        subjects[e][4] = "#dd4";
+        return 1;
+      });
+      setIsReq(sub);
+    } else setIsReq(null);
+    setSubjects([...subjects]);
   }
   
   return (
@@ -100,7 +147,7 @@ export default function FlowCCNew() {
         {subByPeriods.map((el,ind) => {
           return <div key={ind}>
                       {el[0]? <div>{el[0][1]}º Período</div> : ""}
-                      {el.map((e,i) => <Subject click={clicked} key={i} obj={e} />)}
+                      {el.map((e,i) => <Subject click={clicked} key={i} obj={e} before={requires} after={isRequired} />)}
                   </div>;
         })}
       </Container> 

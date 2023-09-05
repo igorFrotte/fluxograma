@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-export default function Subject( {obj} ) {
+export default function Subject( {obj, click} ) {
 
   return (
     <>
-      <Sub color={obj[4]}>
+      <Sub onClick={() => click(obj[6])} color={obj[4]}>
         {obj[0]}
       </Sub>
     </> 
@@ -13,6 +13,7 @@ export default function Subject( {obj} ) {
 
 const Sub = styled.div`
   border: 2px black solid;
+  border-radius: 10px;
   width: 150px;
   height: 100px;
   display: flex;

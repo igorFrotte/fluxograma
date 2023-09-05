@@ -1,10 +1,15 @@
 import { styled } from "styled-components";
 import Subject from "./Subject";
+import { useParams } from "react-router-dom";
+import { useState } from "react";
 
 export default function FlowCCNew() {
 
+  const { id } = useParams();
+  const [url, setUrl] = useState("");
+
   const numPeriods = 8;
-  const subjects = [
+  const [subjects,setSubjects] = useState([
     ["Programação de Computadores 1", 1, [], [], "#fff", 0],
     ["Matemática Discreta", 1, [], [], "#fff", 0],
     ["Geometria Analítica e Cálculo Vetorial", 1, [], [], "#fff", 0],
@@ -43,36 +48,98 @@ export default function FlowCCNew() {
     ["Redes de Computadores 2", 6, [], [], "#fff", 0],
     ["Projeto de Banco de Dados", 6, [], [], "#fff", 0],
     ["Engenharia de Software 2", 6, [], [], "#fff", 0],
+    ["", 7, [], [], "#fff", 0],
+    ["", 7, [], [], "#fff", 0],
+    ["", 8, [], [], "#fff", 0],
+  ]);
 
-  ];
+  if(id)
+    completed(id.split('-'));
   
   const subByPeriods = [];
 
   for(let i=0; i<numPeriods; i++){
-    subByPeriods[i] = subjects.filter( (e) => e[1]== i+1);
+    subByPeriods[i] = subjects.filter( (e, ind) => {
+      e[6] = ind;
+      return e[1] === i+1;
+    });
+  }
+
+  function clicked(index){
+    turnReady(index);
+    setSubjects([...subjects]);
+  }
+
+  function turnReady(index){
+    subjects[index][4] = "#ddd";
+    subjects[index][5] = 1;
+  }
+
+  function completed( list ){
+    list.map( (e) => {
+      if(subjects[e]){
+        turnReady(e);
+      }
+    });
+  }
+
+  function urlGenerator(){
+    let param = window.location.origin + '/';
+    subjects.map((e, i) => {
+      if(e[5] === 1)
+        param = param + i + "-";
+    });
+    setUrl(param);
+    navigator.clipboard.writeText(param);
+    alert("Link copiado!");
   }
   
   return (
-    <Container>
-      {subByPeriods.map((el,ind) => {
-        return <div key={ind}>
-                    {el[0]? <div>{el[0][1]}º Período</div> : ""}
-                    {el.map((e,i) => <Subject key={i} obj={e} />)}
-                </div>;
-      })}
-    </Container> 
+    <>
+      <Container>
+        {subByPeriods.map((el,ind) => {
+          return <div key={ind}>
+                      {el[0]? <div>{el[0][1]}º Período</div> : ""}
+                      {el.map((e,i) => <Subject click={clicked} key={i} obj={e} />)}
+                  </div>;
+        })}
+      </Container> 
+      <Link>
+        <button onClick={() => urlGenerator()}>Gerar URL</button>
+        <div>{url}</div>
+      </Link>
+    </>
   );
 }
 
 const Container = styled.div`
-    display: flex;
-    
-    & > div {
-        margin: 10px;
-        text-align: center;
+  display: flex;
+  
+  & > div {
+      margin: 10px;
+      text-align: center;
 
-        & > div {
-            margin: 5px;
-        }
-    }
+      & > div {
+          margin: 5px;
+      }
+  }
+`;
+
+const Link = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+
+  & > div {
+    margin-left: 20px;
+  }
+
+  & > button {
+    width: 100px;
+    height: 50px;
+    background-color: #373;
+    cursor: pointer;
+    border-radius: 10px;
+  }
 `;

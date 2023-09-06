@@ -15,12 +15,15 @@ export default function Subject( {obj, click, before, after} ) {
 
 const Sub = styled.div`
   border: 2px black solid;
+  padding: 5px;
   border-radius: 10px;
   width: 150px;
   height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 14px;
+  cursor: default;
   background-color: ${(prop) => prop.color};
 `;
 

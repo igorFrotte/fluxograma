@@ -20,7 +20,7 @@ export default function FlowCCNew() {
     ["Fundamentos de Arquitetura de Computadores", 1, [], [], "#fff", 0],
     ["Programação de Computadores 2", 2, [], [], "#fff", 0],
     ["Lógica para Ciência da Computação", 2, [], [], "#fff", 0],
-    ["Álgebra Linear", 2, [15,16], [7,9], "#fff", 0],
+    ["Álgebra Linear", 2, [], [], "#fff", 0],
     ["Cálculo 2", 2, [], [], "#fff", 0],
     ["Circuitos Digitais", 2, [], [], "#fff", 0],
     ["Laboratório de Circuitos Digitais", 2, [], [], "#fff", 0],
@@ -29,7 +29,7 @@ export default function FlowCCNew() {
     ["Física 1", 3, [], [], "#fff", 0],
     ["Métodos Numéricos", 3, [], [], "#fff", 0],
     ["Cálculo 3", 3, [], [], "#fff", 0],
-    ["Paradigmas de Programação", 3, [1,2], [23,24], "#fff", 0],
+    ["Paradigmas de Programação", 3, [], [], "#fff", 0],
     ["Análise e Projetos de Algoritmos", 4, [], [], "#fff", 0],
     ["Probabilidade e Estatística", 4, [], [], "#fff", 0],
     ["Física 3 - A", 4, [], [], "#fff", 0],
@@ -50,9 +50,9 @@ export default function FlowCCNew() {
     ["Redes de Computadores 2", 6, [], [], "#fff", 0],
     ["Projeto de Banco de Dados", 6, [], [], "#fff", 0],
     ["Engenharia de Software 2", 6, [], [], "#fff", 0],
-    ["", 7, [], [], "#fff", 0],
-    ["", 7, [], [], "#fff", 0],
-    ["", 8, [], [], "#fff", 0],
+    ["Empreendedorismo", 7, [], [], "#fff", 0],
+    ["Computação e Sociedade", 7, [], [], "#fff", 0],
+    ["Ética", 8, [], [], "#fff", 0],
   ]);
 
   if(id)

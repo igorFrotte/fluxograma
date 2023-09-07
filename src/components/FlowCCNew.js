@@ -12,36 +12,36 @@ export default function FlowCCNew() {
 
   const numPeriods = 8;
   const [subjects,setSubjects] = useState([
-    ["Programação de Computadores 1", 1, [], [], "#fff", 0],
-    ["Matemática Discreta", 1, [], [], "#fff", 0],
-    ["Geometria Analítica e Cálculo Vetorial", 1, [], [], "#fff", 0],
-    ["Cálculo Diferencial 1", 1, [], [], "#fff", 0],
+    ["Programação de Computadores 1", 1, [], [6,15], "#fff", 0],
+    ["Matemática Discreta", 1, [], [7,19], "#fff", 0],
+    ["Geometria Analítica e Cálculo Vetorial", 1, [], [8], "#fff", 0],
+    ["Cálculo Diferencial 1", 1, [], [9], "#fff", 0],
     ["Introdução à Ciência da Computação", 1, [], [], "#fff", 0],
-    ["Fundamentos de Arquitetura de Computadores", 1, [], [], "#fff", 0],
-    ["Programação de Computadores 2", 2, [], [], "#fff", 0],
-    ["Lógica para Ciência da Computação", 2, [], [], "#fff", 0],
-    ["Álgebra Linear", 2, [], [], "#fff", 0],
-    ["Cálculo 2", 2, [], [], "#fff", 0],
-    ["Circuitos Digitais", 2, [], [], "#fff", 0],
+    ["Fundamentos de Arquitetura de Computadores", 1, [], [10,11], "#fff", 0],
+    ["Programação de Computadores 2", 2, [], [12,17,13], "#fff", 0],
+    ["Lógica para Ciência da Computação", 2, [], [17,32], "#fff", 0],
+    ["Álgebra Linear", 2, [], [26,15], "#fff", 0],
+    ["Cálculo 2", 2, [], [19,14,15,16,20], "#fff", 0],
+    ["Circuitos Digitais", 2, [], [12], "#fff", 0],
     ["Laboratório de Circuitos Digitais", 2, [], [], "#fff", 0],
-    ["Arquitetura de Computadores", 3, [], [], "#fff", 0],
-    ["Estruturas de Dados", 3, [], [], "#fff", 0],
-    ["Física 1", 3, [], [], "#fff", 0],
-    ["Métodos Numéricos", 3, [], [], "#fff", 0],
+    ["Arquitetura de Computadores", 3, [], [25,28], "#fff", 0],
+    ["Estruturas de Dados", 3, [], [26,18,32,33,22,23,27], "#fff", 0],
+    ["Física 1", 3, [], [20], "#fff", 0],
+    ["Métodos Numéricos", 3, [], [21], "#fff", 0],
     ["Cálculo 3", 3, [], [], "#fff", 0],
-    ["Paradigmas de Programação", 3, [], [], "#fff", 0],
-    ["Análise e Projetos de Algoritmos", 4, [], [], "#fff", 0],
-    ["Probabilidade e Estatística", 4, [], [], "#fff", 0],
+    ["Paradigmas de Programação", 3, [], [22,31], "#fff", 0],
+    ["Análise e Projetos de Algoritmos", 4, [], [24], "#fff", 0],
+    ["Probabilidade e Estatística", 4, [], [32], "#fff", 0],
     ["Física 3 - A", 4, [], [], "#fff", 0],
     ["Introdução à Física Computacional", 4, [], [], "#fff", 0],
-    ["Engenharia de Software 1", 4, [], [], "#fff", 0],
-    ["Banco de Dados", 4, [], [], "#fff", 0],
+    ["Engenharia de Software 1", 4, [], [29], "#fff", 0],
+    ["Banco de Dados", 4, [], [29,30,36], "#fff", 0],
     ["Algoritmos em Grafos", 5, [], [], "#fff", 0],
-    ["Sistemas Operacionais", 5, [], [], "#fff", 0],
+    ["Sistemas Operacionais", 5, [], [34], "#fff", 0],
     ["Computação Gráfica", 5, [], [], "#fff", 0],
-    ["Linguagens Formais e Teoria da Computação", 5, [], [], "#fff", 0],
-    ["Redes de Computadores 1", 5, [], [], "#fff", 0],
-    ["Projeto e Arquitetura de Software", 5, [], [], "#fff", 0],
+    ["Linguagens Formais e Teoria da Computação", 5, [], [31], "#fff", 0],
+    ["Redes de Computadores 1", 5, [], [35], "#fff", 0],
+    ["Projeto e Arquitetura de Software", 5, [], [37], "#fff", 0],
     ["Desenvolvimento WEB", 5, [], [], "#fff", 0],
     ["Compiladores", 6, [], [], "#fff", 0],
     ["Inteligência Artificial", 6, [], [], "#fff", 0],
@@ -57,14 +57,17 @@ export default function FlowCCNew() {
 
   if(id)
     completed(id.split('-'));
+
+  subjects.map((e,ind) => {
+    e[6] = ind;
+    e[3].map((el) => subjects[el][2].push(ind));
+    return 1;
+  });
   
   const subByPeriods = [];
 
   for(let i=0; i<numPeriods; i++){
-    subByPeriods[i] = subjects.filter( (e, ind) => {
-      e[6] = ind;
-      return e[1] === i+1;
-    });
+    subByPeriods[i] = subjects.filter( (e, ind) => e[1] === i+1);
   }
 
   function clicked(index){
@@ -107,7 +110,7 @@ export default function FlowCCNew() {
   }
 
   function clearSubs( item, ind ){
-    if(item){
+    if(item !== null){
       subjects[item][ind].map((e) => {
         if(subjects[e][5] === 1)
           subjects[e][4] = "#ddd";
@@ -151,10 +154,10 @@ export default function FlowCCNew() {
                   </div>;
         })}
       </Container> 
-      <Link>
+      <LinkURL>
         <button onClick={() => urlGenerator()}>Gerar URL</button>
         <div>{url}</div>
-      </Link>
+      </LinkURL>
     </>
   );
 }
@@ -172,7 +175,7 @@ const Container = styled.div`
   }
 `;
 
-const Link = styled.div`
+const LinkURL = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;

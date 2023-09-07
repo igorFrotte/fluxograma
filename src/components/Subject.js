@@ -4,10 +4,10 @@ export default function Subject( {obj, click, before, after} ) {
 
   return (
     <Container>
-      <p onClick={() => before(obj[2], obj[6])}>{"<-"}</p>
-      <p onClick={() => after(obj[3], obj[6])}>{"->"}</p>
+      {obj[2].length? <p className="before" onClick={() => before(obj[2], obj[6])}>{"<-"}</p>: ""}
+      {obj[3].length? <p className="after" onClick={() => after(obj[3], obj[6])}>{"->"}</p> : ""}
       <Sub onClick={() => click(obj[6])} color={obj[4]}>
-        {obj[0]}
+        {obj[0] + " -  " + obj[6]}
       </Sub>
     </Container> 
   );
@@ -40,12 +40,12 @@ const Container = styled.div`
     font-size: 10px;
   }
 
-  & > p:nth-child(1) {
+  .before {
     left: 5px;
     background-color: #a5a;
   }
 
-  & > p:nth-child(2) {
+  .after {
     right: 5px;
     background-color: #aa5;
   }

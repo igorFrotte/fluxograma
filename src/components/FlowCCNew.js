@@ -9,6 +9,7 @@ export default function FlowCCNew() {
   const [url, setUrl] = useState("");
   const [req, setReq] = useState(null);
   const [isReq, setIsReq] = useState(null);
+  const [free, setFree] = useState(false);
 
   const numPeriods = 8;
   const [subjects,setSubjects] = useState([
@@ -110,6 +111,7 @@ export default function FlowCCNew() {
   }
 
   function clearSubs( item, ind ){
+    clearFree();
     if(item !== null){
       subjects[item][ind].map((e) => {
         if(subjects[e][5] === 1)
@@ -143,6 +145,33 @@ export default function FlowCCNew() {
     } else setIsReq(null);
     setSubjects([...subjects]);
   }
+
+  function clearFree(){
+    subjects.map((e) => {
+      if(e[4] === "#4dd"){
+        if(e[5])
+          e[4] = "#ddd";
+        else e[4] = "#fff";
+      }
+      return 1;
+    });
+  }
+
+  function freeSubs(){
+    clearSubs(req, 2);
+    clearSubs(isReq, 3);
+    if(!free){
+      subjects.map((e, i) => {
+        let ready = e[2].filter((el) => subjects[el][5] === 0);
+        if(ready.length === 0 && e[5] === 0)
+          e[4] = "#4dd";
+        return 1;
+      });
+    }
+    setFree(!free);
+    setSubjects([...subjects]);
+    return 1;
+  }
   
   return (
     <>
@@ -154,10 +183,13 @@ export default function FlowCCNew() {
                   </div>;
         })}
       </Container> 
-      <LinkURL>
-        <button onClick={() => urlGenerator()}>Gerar URL</button>
+      <Menu>
         <div>{url}</div>
-      </LinkURL>
+        <div>
+          <button onClick={() => urlGenerator()}>Gerar URL</button>
+          <button onClick={() => freeSubs()}>Livres</button>
+        </div>
+      </Menu>
     </>
   );
 }
@@ -175,21 +207,23 @@ const Container = styled.div`
   }
 `;
 
-const LinkURL = styled.div`
+const Menu = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 
-  & > div {
-    margin-left: 20px;
+  div {
+    margin-bottom: 10px;
   }
 
-  & > button {
+  button {
     width: 100px;
     height: 50px;
     background-color: #373;
     cursor: pointer;
     border-radius: 10px;
+    margin: 0 10px;
   }
 `;

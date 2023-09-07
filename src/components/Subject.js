@@ -7,7 +7,7 @@ export default function Subject( {obj, click, before, after} ) {
       {obj[2].length? <p className="before" onClick={() => before(obj[2], obj[6])}>{"<-"}</p>: ""}
       {obj[3].length? <p className="after" onClick={() => after(obj[3], obj[6])}>{"->"}</p> : ""}
       <Sub onClick={() => click(obj[6])} color={obj[4]}>
-        {obj[0] + " -  " + obj[6]}
+        {obj[0]}
       </Sub>
     </Container> 
   );

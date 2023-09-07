@@ -6,6 +6,7 @@ export default function Subject( {obj, click, before, after} ) {
     <Container>
       {obj[2].length? <p className="before" onClick={() => before(obj[2], obj[6])}>{"<-"}</p>: ""}
       {obj[3].length? <p className="after" onClick={() => after(obj[3], obj[6])}>{"->"}</p> : ""}
+      {obj[7]? <p className="desc" onClick={() => alert(obj[7])}>{"i"}</p> : ""}
       <Sub onClick={() => click(obj[6])} color={obj[4]}>
         {obj[0]}
       </Sub>
@@ -48,5 +49,10 @@ const Container = styled.div`
   .after {
     right: 5px;
     background-color: #aa5;
+  }
+
+  .desc {
+    left: calc(50% - 8px);
+    background-color: #5aa;
   }
 `;

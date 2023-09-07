@@ -64,6 +64,13 @@ export default function FlowCCNew() {
     e[3].map((el) => subjects[el][2].push(ind));
     return 1;
   });
+
+  //tirar 11-21-38-39-40-
+  subjects[11][7] = "Correquisito de Circuitos Digitais";
+  subjects[21][7] = "Correquisito de Física 3 - A";
+  subjects[38][7] = "Requer 1440hrs cursadas";
+  subjects[39][7] = "Requer 1440hrs cursadas";
+  subjects[40][7] = "Requer 1440hrs cursadas";
   
   const subByPeriods = [];
 

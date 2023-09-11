@@ -5,7 +5,8 @@ import { useState } from "react";
 
 export default function FlowCCNew() {
 
-  const { id } = useParams();
+  // eslint-disable-next-line
+  const [id, setId] = useState(useParams().id);
   const [url, setUrl] = useState("");
   const [req, setReq] = useState(null);
   const [isReq, setIsReq] = useState(null);

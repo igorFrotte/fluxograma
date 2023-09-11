@@ -83,8 +83,8 @@ export default function FlowCCNew() {
     setSubjects([...subjects]);
   }
 
-  function turnReady(index, hard = 1){
-    if(subjects[index][5] !== 1 && hard === 1){
+  function turnReady(index){
+    if(subjects[index][5] !== 1){
       if(subjects[index][4] === "#fff")
         subjects[index][4] = "#ddd";
       subjects[index][5] = 1;
@@ -99,7 +99,7 @@ export default function FlowCCNew() {
   function completed( list ){
     list.map( (e) => {
       if(subjects[e]){
-        turnReady(e, 0);
+        turnReady(e);
       }
       return 1; 
     });

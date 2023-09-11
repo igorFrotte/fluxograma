@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.js": "/fluxograma/static/js/main.ea086699.js",
+    "main.js": "/fluxograma/static/js/main.4d19c952.js",
     "static/js/787.84a26fa6.chunk.js": "/fluxograma/static/js/787.84a26fa6.chunk.js",
     "index.html": "/fluxograma/index.html",
-    "main.ea086699.js.map": "/fluxograma/static/js/main.ea086699.js.map",
+    "main.4d19c952.js.map": "/fluxograma/static/js/main.4d19c952.js.map",
     "787.84a26fa6.chunk.js.map": "/fluxograma/static/js/787.84a26fa6.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.ea086699.js"
+    "static/js/main.4d19c952.js"
   ]
 }

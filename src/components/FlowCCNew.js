@@ -5,8 +5,7 @@ import { useState } from "react";
 
 export default function FlowCCNew() {
 
-  // eslint-disable-next-line
-  const [id, setId] = useState(useParams().id);
+  const { id } = useParams();
   const [url, setUrl] = useState("");
   const [req, setReq] = useState(null);
   const [isReq, setIsReq] = useState(null);
@@ -21,7 +20,7 @@ export default function FlowCCNew() {
     ["Introdução à Ciência da Computação", 1, [], [], "#fff", 0],
     ["Fundamentos de Arquitetura de Computadores", 1, [], [10,11], "#fff", 0],
     ["Programação de Computadores 2", 2, [], [12,17,13], "#fff", 0],
-    ["Lógica para Ciência da Computação", 2, [], [17,32], "#fff", 0],
+    ["Lógica para Ciência da Computação", 2, [], [32], "#fff", 0],
     ["Álgebra Linear", 2, [], [26,15], "#fff", 0],
     ["Cálculo 2", 2, [], [19,14,15,16,20], "#fff", 0],
     ["Circuitos Digitais", 2, [], [12], "#fff", 0],

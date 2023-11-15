@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import Subject from "./Subject";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function FlowCCNew() {
 
@@ -56,8 +56,10 @@ export default function FlowCCNew() {
     ["Ética", 8, [], [], "#fff", 0],
   ]);
 
-  if(id)
-    completed(id.split('-'));
+  useEffect(() => {
+    if(id)
+      completed(id.split('-'));
+  }, []);
 
   subjects.map((e,ind) => {
     e[6] = ind;

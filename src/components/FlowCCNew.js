@@ -59,6 +59,7 @@ export default function FlowCCNew() {
   useEffect(() => {
     if(id)
       completed(id.split('-'));
+    setSubjects([...subjects]);
   }, []);
 
   subjects.map((e,ind) => {
